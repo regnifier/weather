@@ -1,13 +1,23 @@
 package com.example.weatherapp.presentation.search
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.weatherapp.presentation.search.model.SearchState
+import com.example.weatherapp.presentation.search.model.UiState
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -16,17 +26,46 @@ fun SearchScreen(
 ) {
     val state = viewModel.container.stateFlow.collectAsStateWithLifecycle()
 
-    when (state.value) {
-        SearchState.Loading -> {
-
-        }
-        is SearchState.Content -> {
-            Box(Modifier.fillMaxSize()) {
-                Text(text = "test", modifier = Modifier.align(Alignment.Center))
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        TextField(
+            value = state.value.searchText,
+            onValueChange = viewModel::search,
+            modifier = Modifier.fillMaxWidth(),
+            placeholder = { Text(text = "Search") }
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        when (val stateValue = state.value.uiState) {
+            UiState.Loading -> {
+                Box(modifier = Modifier.fillMaxSize()) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
             }
-        }
-        SearchState.Error -> {
 
+            is UiState.Content -> {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    items(stateValue.cityList) { city ->
+                        Text(
+                            text = "${city.cityName} |${city.countryCode}",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 16.dp)
+                        )
+                    }
+
+                }
+            }
+
+            UiState.Error -> {
+
+            }
         }
     }
 }

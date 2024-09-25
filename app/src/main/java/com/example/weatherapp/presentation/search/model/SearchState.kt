@@ -1,9 +1,18 @@
 package com.example.weatherapp.presentation.search.model
 
-sealed class SearchState {
-    data object Loading : SearchState()
+import com.example.weatherapp.domain.model.City
 
-    data class Content(val cityList: List<String>) : SearchState()
+data class SearchState(
+    val uiState: UiState = UiState.Loading,
+    val searchText: String = ""
+)
 
-    data object Error : SearchState()
+sealed class UiState {
+    data object Loading : UiState()
+
+    data class Content(
+        val cityList: List<City>
+    ) : UiState()
+
+    data object Error : UiState()
 }

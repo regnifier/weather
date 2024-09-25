@@ -82,4 +82,6 @@ dependencies {
 
     implementation(libs.mvi.viewmodel)
     implementation(libs.mvi.compose)
+
+    implementation(libs.kotlinx.serialization)
 }

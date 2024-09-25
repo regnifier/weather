@@ -8,7 +8,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val BASE_URL = "https://"
+private const val BASE_URL = "https://geocoding-api.open-meteo.com/"
 const val TIMEOUT = 10L
 
 val networkModule = module {
