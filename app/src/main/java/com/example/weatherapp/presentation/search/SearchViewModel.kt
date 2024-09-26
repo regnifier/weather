@@ -2,10 +2,10 @@ package com.example.weatherapp.presentation.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weatherapp.domain.SearchRepository
+import com.example.weatherapp.domain.WeatherRepository
 import com.example.weatherapp.presentation.search.model.SearchSideEffect
 import com.example.weatherapp.presentation.search.model.SearchState
-import com.example.weatherapp.presentation.search.model.UiState
+import com.example.weatherapp.presentation.search.model.SearchUiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +19,7 @@ import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 
-class SearchViewModel(private val searchRepository: SearchRepository) :
+class SearchViewModel(private val weatherRepository: WeatherRepository) :
     ContainerHost<SearchState, SearchSideEffect>, ViewModel() {
 
     override val container = container<SearchState, SearchSideEffect>(SearchState())
@@ -36,13 +36,13 @@ class SearchViewModel(private val searchRepository: SearchRepository) :
             .onEach {
                 intent {
                     reduce {
-                        state.copy(uiState = UiState.Loading)
+                        state.copy(searchUiState = SearchUiState.Loading)
                     }
                 }
-                val searchedCities = searchRepository.searchCity(query)
+                val searchedCities = weatherRepository.searchCity(query)
                 intent {
                     reduce {
-                        state.copy(uiState = UiState.Content(searchedCities))
+                        state.copy(searchUiState = SearchUiState.Content(searchedCities))
                     }
                 }
             }
@@ -50,7 +50,7 @@ class SearchViewModel(private val searchRepository: SearchRepository) :
             .catch {
                 intent {
                     reduce {
-                        state.copy(uiState = UiState.Error)
+                        state.copy(searchUiState = SearchUiState.Error)
                     }
                 }
             }

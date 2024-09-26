@@ -1,25 +1,19 @@
 package com.example.weatherapp.navigation
 
 import android.os.Bundle
-import android.window.SplashScreen
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.weatherapp.presentation.detail.DetailScreen
 import com.example.weatherapp.presentation.search.SearchScreen
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 
@@ -47,7 +41,27 @@ fun Navigation() {
         startDestination = "search_screen"
     ) {
         composable("search_screen") {
-            SearchScreen()
+            SearchScreen(
+                onNavigateToDetailScreen = { cityName, latitude, longitude ->
+                    navController.navigate("detail_screen/$cityName/$latitude/$longitude")
+                }
+            )
+        }
+
+        composable("detail_screen/{name}/{latitude}/{longitude}",
+            arguments = listOf(
+                navArgument("name") { type = NavType.StringType },
+                navArgument("latitude") { type = NavType.FloatType },
+                navArgument("longitude") { type = NavType.FloatType }
+            )) { backStackEntry ->
+            DetailScreen(
+                cityName = backStackEntry.arguments?.getString("name")
+                    ?: throw IllegalArgumentException("Name must be provided"),
+                latitude = backStackEntry.arguments?.getFloat("latitude")
+                    ?: throw IllegalArgumentException("Latitude must be provided"),
+                longitude = backStackEntry.arguments?.getFloat("longitude")
+                    ?: throw IllegalArgumentException("Longitude must be provided"),
+            )
         }
     }
 }

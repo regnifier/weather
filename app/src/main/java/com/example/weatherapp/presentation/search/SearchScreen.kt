@@ -1,5 +1,6 @@
 package com.example.weatherapp.presentation.search
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,12 +18,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.weatherapp.presentation.search.model.UiState
+import com.example.weatherapp.presentation.search.model.SearchUiState
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SearchScreen(
-    viewModel: SearchViewModel = koinViewModel()
+    viewModel: SearchViewModel = koinViewModel(),
+    onNavigateToDetailScreen: (
+        cityName: String,
+        latitude: Float,
+        longitude: Float
+    ) -> Unit
 ) {
     val state = viewModel.container.stateFlow.collectAsStateWithLifecycle()
 
@@ -38,8 +44,8 @@ fun SearchScreen(
             placeholder = { Text(text = "Search") }
         )
         Spacer(modifier = Modifier.height(16.dp))
-        when (val stateValue = state.value.uiState) {
-            UiState.Loading -> {
+        when (val stateValue = state.value.searchUiState) {
+            SearchUiState.Loading -> {
                 Box(modifier = Modifier.fillMaxSize()) {
                     CircularProgressIndicator(
                         modifier = Modifier.align(Alignment.Center)
@@ -47,7 +53,7 @@ fun SearchScreen(
                 }
             }
 
-            is UiState.Content -> {
+            is SearchUiState.Content -> {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize()
                 ) {
@@ -57,13 +63,19 @@ fun SearchScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(vertical = 16.dp)
+                                .clickable {
+                                    onNavigateToDetailScreen(
+                                        city.cityName,
+                                        52.2298f,
+                                        21.0118f
+                                    )
+                                }
                         )
                     }
-
                 }
             }
 
-            UiState.Error -> {
+            SearchUiState.Error -> {
 
             }
         }

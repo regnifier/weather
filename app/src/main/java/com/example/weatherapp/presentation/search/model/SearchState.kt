@@ -1,18 +1,20 @@
 package com.example.weatherapp.presentation.search.model
 
+import androidx.compose.runtime.Immutable
 import com.example.weatherapp.domain.model.City
 
 data class SearchState(
-    val uiState: UiState = UiState.Loading,
+    val searchUiState: SearchUiState = SearchUiState.Loading,
     val searchText: String = ""
 )
 
-sealed class UiState {
-    data object Loading : UiState()
+sealed class SearchUiState {
+    data object Loading : SearchUiState()
 
+    @Immutable
     data class Content(
         val cityList: List<City>
-    ) : UiState()
+    ) : SearchUiState()
 
-    data object Error : UiState()
+    data object Error : SearchUiState()
 }
