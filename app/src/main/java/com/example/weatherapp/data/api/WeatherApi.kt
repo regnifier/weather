@@ -1,6 +1,7 @@
 package com.example.weatherapp.data.api
 
 import com.example.weatherapp.data.model.CityDto
+import com.example.weatherapp.data.model.CurrentDto
 import com.example.weatherapp.data.model.WeatherDto
 import com.example.weatherapp.utils.PRESSURE_MSL
 import com.example.weatherapp.utils.RAIN

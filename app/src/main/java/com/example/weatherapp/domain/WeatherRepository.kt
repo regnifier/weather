@@ -7,4 +7,8 @@ interface WeatherRepository {
     suspend fun searchCity(city: String): List<City>
 
     suspend fun checkWeather(latitude: Double, longitude: Double): Weather
+
+    suspend fun saveCity(city: City)
+
+    suspend fun getSavedCities(): List<City>
 }

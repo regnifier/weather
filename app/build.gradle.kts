@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-parcelize")
+    id("com.google.devtools.ksp") version "1.9.0-1.0.13"
 }
 
 android {
@@ -75,6 +77,7 @@ dependencies {
     implementation(libs.coroutines.core)
 
     implementation(libs.retrofit2)
+    implementation(libs.retrofit2.moshi)
     implementation(libs.retrofit2.converter)
 
     implementation(libs.okhttp3)
@@ -84,4 +87,8 @@ dependencies {
     implementation(libs.mvi.compose)
 
     implementation(libs.kotlinx.serialization)
+
+    implementation(libs.room.runtime)
+    annotationProcessor (libs.room.compiler)
+    ksp(libs.room.compiler)
 }

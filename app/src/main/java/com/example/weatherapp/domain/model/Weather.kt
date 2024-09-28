@@ -2,9 +2,9 @@ package com.example.weatherapp.domain.model
 
 data class Weather(
     val current: Current,
-    val dailyInfo: Map<String, Double>,
+    val dailyInfo: List<Pair<String, Double>>,
     val dailyTemperatureUnit: String,
-    val hourlyInfo: Map<String, Double>,
+    val hourlyInfo: List<Pair<String, Double>>,
     val hourlyTemperatureUnits: String
 )
 

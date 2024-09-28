@@ -10,6 +10,7 @@ sealed class DetailUiState {
     data object Loading : DetailUiState()
 
     data class Content(
+        val cityName: String,
         val weather: Weather
     ) : DetailUiState()
 

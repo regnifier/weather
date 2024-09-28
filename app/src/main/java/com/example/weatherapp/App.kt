@@ -1,6 +1,7 @@
 package com.example.weatherapp
 
 import android.app.Application
+import com.example.weatherapp.di.databaseModule
 import com.example.weatherapp.di.networkModule
 import com.example.weatherapp.di.searchModule
 import com.example.weatherapp.di.viewModelsModule
@@ -17,6 +18,7 @@ class App : Application() {
             androidLogger(Level.ERROR)
             androidContext(this@App)
             modules(
+                databaseModule,
                 networkModule,
                 searchModule,
                 viewModelsModule

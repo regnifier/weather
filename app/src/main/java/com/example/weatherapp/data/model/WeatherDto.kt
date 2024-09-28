@@ -1,63 +1,55 @@
 package com.example.weatherapp.data.model
 
+import com.squareup.moshi.Json
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-
-@Serializable
 data class WeatherDto(
-    @SerialName("current")
+    @field:Json(name = "current")
     val current: CurrentDto? = null,
-    @SerialName("daily")
+    @field:Json(name = "daily")
     val daily: DailyDto? = null,
-    @SerialName("daily_units")
+    @field:Json(name = "daily_units")
     val dailyUnits: DailyUnitsDto? = null,
-    @SerialName("hourly")
+    @field:Json(name = "hourly")
     val hourly: HourlyDto? = null,
-    @SerialName("hourly_units")
+    @field:Json(name = "hourly_units")
     val hourlyUnits: HourlyUnitsDto? = null
 )
 
-@Serializable
 data class HourlyUnitsDto(
-    @SerialName("temperature_2m")
+    @field:Json(name = "temperature_2m")
     val temperature2m: String? = null
 )
 
-@Serializable
 data class HourlyDto(
-    @SerialName("temperature_2m")
+    @field:Json(name = "temperature_2m")
     val temperature2m: List<Double>? = null,
-    @SerialName("time")
+    @field:Json(name = "time")
     val time: List<String>? = null
 )
 
-@Serializable
 data class DailyUnitsDto(
-    @SerialName("temperature_2m_max")
+    @field:Json(name = "temperature_2m_max")
     val temperature2mMax: String? = null
 )
 
-@Serializable
 data class DailyDto(
-    @SerialName("temperature_2m_max")
+    @field:Json(name = "temperature_2m_max")
     val temperature2mMax: List<Double>? = null,
-    @SerialName("time")
+    @field:Json(name = "time")
     val time: List<String>? = null
 )
 
-@Serializable
 data class CurrentDto(
-    @SerialName("pressure_msl")
+    @field:Json(name = "pressure_msl")
     val pressureMsl: Double? = null,
-    @SerialName("relative_humidity_2m")
+    @field:Json(name = "relative_humidity_2m")
     val relativeHumidity2m: Int? = null,
-    @SerialName("temperature_2m")
+    @field:Json(name = "temperature_2m")
     val temperature2m: Double? = null,
-    @SerialName("time")
+    @field:Json(name = "time")
     val time: String? = null,
-    @SerialName("wind_gusts_10m")
+    @field:Json(name = "wind_gusts_10m")
     val windGusts10m: Double? = null,
-    @SerialName("wind_speed_10m")
+    @field:Json(name = "wind_speed_10m")
     val windSpeed10m: Double? = null
 )

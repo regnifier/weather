@@ -7,6 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 private const val BASE_URL = "https://geocoding-api.open-meteo.com/"
 const val TIMEOUT = 10L
@@ -28,7 +29,7 @@ val networkModule = module {
     ): Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(okHttpClient)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create())
         .build()
 
     fun provideCashApi(retrofit: Retrofit): WeatherApi = retrofit.create(WeatherApi::class.java)

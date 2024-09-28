@@ -5,7 +5,8 @@ import com.example.weatherapp.domain.model.City
 
 data class SearchState(
     val searchUiState: SearchUiState = SearchUiState.Loading,
-    val searchText: String = ""
+    val searchText: String = "",
+    val savedCities: List<City> = emptyList()
 )
 
 sealed class SearchUiState {

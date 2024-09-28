@@ -16,4 +16,10 @@ data class CityDataDto(
     val name: String? = null,
     @SerialName("country")
     val country: String? = null,
+    @SerialName("latitude")
+    val latitude: Double? = null,
+    @SerialName("longitude")
+    val longitude: Double? = null,
+    @SerialName("id")
+    val id: Int? = null
 )
