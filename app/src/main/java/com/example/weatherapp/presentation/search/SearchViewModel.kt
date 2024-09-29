@@ -53,7 +53,7 @@ class SearchViewModel(private val weatherRepository: WeatherRepository) :
             val savedCities = weatherRepository.getSavedCities()
             intent {
                 reduce {
-                    state.copy(savedCities = savedCities)
+                    state.copy(searchUiState = SearchUiState.Content, savedCities = savedCities)
                 }
             }
         }
@@ -77,7 +77,7 @@ class SearchViewModel(private val weatherRepository: WeatherRepository) :
                 val searchedCities = weatherRepository.searchCity(query)
                 intent {
                     reduce {
-                        state.copy(searchUiState = SearchUiState.Content(searchedCities))
+                        state.copy(searchUiState = SearchUiState.Content, cityList = searchedCities)
                     }
                 }
             }

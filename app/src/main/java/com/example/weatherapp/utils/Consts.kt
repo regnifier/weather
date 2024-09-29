@@ -9,4 +9,5 @@ const val WIND_SPEED_10M = "wind_speed_10m"
 const val WIND_DIRECTION_10M = "wind_direction_10m"
 const val WIND_GUSTS_10M = "wind_gusts_10m"
 const val TEMPERATURE_2M_MAX = "temperature_2m_max"
+const val SEARCH_LANGUAGE = "pl"
 

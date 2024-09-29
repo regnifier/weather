@@ -10,5 +10,6 @@
     <string name="daily_forecast_text">Daily forecast</string>
     <string name="hourly_forecast_text">Hourly forecast</string>
     <string name="search_hint">Search</string>
-    <string name="search_empty">Your search history is empty.</string>
+    <string name="search_empty">Your search history is empty</string>
+    <string name="search_error">Something went wrong</string>
 </resources>

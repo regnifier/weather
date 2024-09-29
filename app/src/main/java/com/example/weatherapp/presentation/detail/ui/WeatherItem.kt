@@ -13,8 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
+import com.example.weatherapp.utils.getTemperatureColor
 
 @Composable
 fun WeatherItem(
@@ -43,8 +45,12 @@ fun WeatherItem(
                     .padding(4.dp)
             )
             Text(
-                text = "${weatherValue}°C",
-                style = MaterialTheme.typography.titleMedium
+                text = stringResource(
+                    R.string.temperature_value_in_celsius,
+                    weatherValue
+                ),
+                style = MaterialTheme.typography.titleMedium,
+                color = weatherValue.getTemperatureColor()
             )
         }
     }

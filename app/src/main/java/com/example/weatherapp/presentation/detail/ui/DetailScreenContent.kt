@@ -25,12 +25,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
 import com.example.weatherapp.domain.model.Weather
+import com.example.weatherapp.ui.theme.LocalAppDimens
+import com.example.weatherapp.utils.getTemperatureColor
 import com.example.weatherapp.utils.getTimeFromString
 import com.example.weatherapp.utils.isToday
-
 
 @Composable
 fun DetailScreenContent(
@@ -45,23 +45,23 @@ fun DetailScreenContent(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            modifier = Modifier.padding(top = 12.dp),
+            modifier = Modifier.padding(top = LocalAppDimens.current.s_12),
             text = cityName,
             style = MaterialTheme.typography.headlineMedium
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(LocalAppDimens.current.s_16))
         Text(
             text = weatherInfo.current.time,
             style = MaterialTheme.typography.bodyLarge
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(LocalAppDimens.current.s_16))
         Image(
             painter = painterResource(R.drawable.ic_weather),
-            modifier = Modifier.size(64.dp),
+            modifier = Modifier.size(LocalAppDimens.current.s_64),
             contentScale = ContentScale.FillBounds,
             contentDescription = null
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(LocalAppDimens.current.s_16))
         Text(
             text = stringResource(
                 R.string.temperature_value_in_celsius,
@@ -69,12 +69,13 @@ fun DetailScreenContent(
             ),
             style = MaterialTheme.typography.headlineLarge,
             fontWeight = FontWeight.Bold,
+            color = weatherInfo.current.temperature2m.getTemperatureColor()
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(LocalAppDimens.current.s_16))
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp),
+                .padding(start = LocalAppDimens.current.s_16),
         ) {
             WeatherComponent(
                 modifier = Modifier.weight(1f),
@@ -98,33 +99,33 @@ fun DetailScreenContent(
                 iconId = R.drawable.ic_uv,
             )
         }
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(LocalAppDimens.current.s_32))
         Text(
             text = stringResource(R.string.hourly_forecast_text),
             style = MaterialTheme.typography.titleMedium
         )
-        Spacer(modifier = Modifier.height(16.dp))
-        LazyRow(modifier = Modifier.padding(horizontal = 16.dp)) {
+        Spacer(modifier = Modifier.height(LocalAppDimens.current.s_16))
+        LazyRow(modifier = Modifier.padding(horizontal = LocalAppDimens.current.s_16)) {
             items(weatherInfo.hourlyInfo) { weatherData ->
                 if (weatherData.first.isToday()) {
                     WeatherItem(
-                        modifier = Modifier.padding(horizontal = 4.dp),
+                        modifier = Modifier.padding(horizontal = LocalAppDimens.current.s_4),
                         weatherDate = weatherData.first.getTimeFromString(),
                         weatherValue = weatherData.second
                     )
                 }
             }
         }
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(LocalAppDimens.current.s_32))
         Text(
             text = stringResource(R.string.daily_forecast_text),
             style = MaterialTheme.typography.titleMedium
         )
-        Spacer(modifier = Modifier.height(16.dp))
-        LazyRow(modifier = Modifier.padding(horizontal = 16.dp)) {
+        Spacer(modifier = Modifier.height(LocalAppDimens.current.s_16))
+        LazyRow(modifier = Modifier.padding(horizontal = LocalAppDimens.current.s_16)) {
             items(weatherInfo.dailyInfo) { weatherData ->
                 WeatherItem(
-                    modifier = Modifier.padding(horizontal = 4.dp),
+                    modifier = Modifier.padding(horizontal = LocalAppDimens.current.s_4),
                     weatherDate = weatherData.first,
                     weatherValue = weatherData.second
                 )
@@ -142,13 +143,13 @@ private fun WeatherComponent(
     iconId: Int,
 ) {
     ElevatedCard(
-        modifier = modifier.padding(end = 16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+        modifier = modifier.padding(end = LocalAppDimens.current.s_16),
+        elevation = CardDefaults.cardElevation(defaultElevation = LocalAppDimens.current.s_6),
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp),
+                .padding(vertical = LocalAppDimens.current.s_8),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
@@ -157,7 +158,7 @@ private fun WeatherComponent(
                 style = MaterialTheme.typography.bodySmall,
             )
             Image(
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier.size(LocalAppDimens.current.s_24),
                 painter = painterResource(id = iconId),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,

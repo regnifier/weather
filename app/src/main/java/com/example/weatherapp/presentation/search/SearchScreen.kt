@@ -19,10 +19,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.weatherapp.R
 import com.example.weatherapp.presentation.search.model.SearchUiState
+import com.example.weatherapp.ui.theme.LocalAppDimens
+import com.example.weatherapp.utils.letters
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -40,15 +41,19 @@ fun SearchScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(LocalAppDimens.current.s_16)
     ) {
         TextField(
             value = state.value.searchText,
-            onValueChange = viewModel::search,
+            onValueChange = {
+                viewModel.search(it.letters())
+            },
             modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text(text = stringResource(R.string.search_hint)) }
+            placeholder = { Text(text = stringResource(R.string.search_hint)) },
+            singleLine = true,
+            maxLines = 1
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(LocalAppDimens.current.s_16))
         if (state.value.searchText.isEmpty() && state.value.savedCities.isEmpty()) {
             Box(modifier = Modifier.fillMaxSize()) {
                 Text(
@@ -75,14 +80,14 @@ fun SearchScreen(
                             if (state.value.searchText.isEmpty()) {
                                 state.value.savedCities
                             } else {
-                                stateValue.cityList
+                                state.value.cityList
                             }
                         ) { city ->
                             Text(
                                 text = "${city.cityName} |${city.countryCode}",
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(vertical = 16.dp)
+                                    .padding(vertical = LocalAppDimens.current.s_16)
                                     .clickable {
                                         viewModel.saveCity(city)
                                         onNavigateToDetailScreen(
@@ -97,7 +102,13 @@ fun SearchScreen(
                 }
 
                 SearchUiState.Error -> {
-
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        Text(
+                            modifier = Modifier.align(Alignment.Center),
+                            text = stringResource(R.string.search_error),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                    }
                 }
             }
         }

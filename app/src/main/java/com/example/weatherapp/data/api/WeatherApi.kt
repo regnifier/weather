@@ -1,11 +1,11 @@
 package com.example.weatherapp.data.api
 
 import com.example.weatherapp.data.model.CityDto
-import com.example.weatherapp.data.model.CurrentDto
 import com.example.weatherapp.data.model.WeatherDto
 import com.example.weatherapp.utils.PRESSURE_MSL
 import com.example.weatherapp.utils.RAIN
 import com.example.weatherapp.utils.RELATIVE_HUMIDITY_2M
+import com.example.weatherapp.utils.SEARCH_LANGUAGE
 import com.example.weatherapp.utils.TEMPERATURE_2M
 import com.example.weatherapp.utils.TEMPERATURE_2M_MAX
 import com.example.weatherapp.utils.WEATHER_CODE
@@ -19,7 +19,8 @@ import retrofit2.http.Url
 interface WeatherApi {
     @GET("v1/search")
     suspend fun searchCity(
-        @Query("name") city: String
+        @Query("name") city: String,
+        @Query("language") language: String = SEARCH_LANGUAGE
     ): CityDto
 
     @GET

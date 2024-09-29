@@ -1,25 +1,21 @@
 package com.example.weatherapp.data.model
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
 
-
-@Serializable
 data class CityDto(
-    @SerialName("results")
+    @field:Json(name = "results")
     val results: List<CityDataDto>? = null
 )
 
-@Serializable
 data class CityDataDto(
-    @SerialName("name")
+    @field:Json(name = "name")
     val name: String? = null,
-    @SerialName("country")
+    @field:Json(name = "country")
     val country: String? = null,
-    @SerialName("latitude")
+    @field:Json(name = "latitude")
     val latitude: Double? = null,
-    @SerialName("longitude")
+    @field:Json(name = "longitude")
     val longitude: Double? = null,
-    @SerialName("id")
+    @field:Json(name = "id")
     val id: Int? = null
 )

@@ -18,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.weatherapp.presentation.detail.DetailScreen
 import com.example.weatherapp.presentation.search.SearchScreen
+import com.example.weatherapp.presentation.splash.SplashScreen
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -48,8 +49,18 @@ fun Navigation(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = "search_screen"
+        startDestination = "splash_screen"
     ) {
+        composable("splash_screen") {
+            SplashScreen(
+                modifier = modifier,
+                onNavigateToSearchScreen = {
+                    navController.navigate("search_screen") {
+                        popUpTo("splash_screen") { inclusive = true }
+                    }
+                }
+            )
+        }
         composable("search_screen") {
             SearchScreen(
                 modifier = modifier,
