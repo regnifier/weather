@@ -1,6 +1,5 @@
 package com.example.weatherapp
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.example.weatherapp.utils.getLocalDateFromString
 import com.example.weatherapp.utils.getTemperatureColor
