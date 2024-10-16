@@ -3,12 +3,11 @@
 In this project you will find :
 
 * Clean architecture
-* Mvi approach for presentation layer
+* MVVM approach for presentation layer
 * **[Koin](https://insert-koin.io/)** for dependency injection approach
 * **[Retrofit](https://square.github.io/retrofit/)** for networking
 * **[Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)** for asynchronous operations
 * **[Flow](https://kotlinlang.org/docs/flow.html)** for observer pattern implementation
-* **[Mvi-orbit](https://github.com/orbit-mvi/orbit-mvi)** for presentation layer architecture
 * **[Jetpack Compose](https://developer.android.com/jetpack/compose)** for app ui
 
 ## What was not implemented?

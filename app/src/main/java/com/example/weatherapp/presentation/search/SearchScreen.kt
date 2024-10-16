@@ -36,7 +36,7 @@ fun SearchScreen(
         longitude: Float
     ) -> Unit
 ) {
-    val state = viewModel.container.stateFlow.collectAsStateWithLifecycle()
+    val state = viewModel.searchState.collectAsStateWithLifecycle()
 
     Column(
         modifier = modifier
@@ -63,7 +63,7 @@ fun SearchScreen(
                 )
             }
         } else {
-            when (val stateValue = state.value.searchUiState) {
+            when (state.value.searchUiState) {
                 SearchUiState.Loading -> {
                     Box(modifier = Modifier.fillMaxSize()) {
                         CircularProgressIndicator(

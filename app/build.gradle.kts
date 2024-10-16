@@ -83,9 +83,6 @@ dependencies {
     implementation(libs.okhttp3)
     implementation(libs.okhttp3.logging)
 
-    implementation(libs.mvi.viewmodel)
-    implementation(libs.mvi.compose)
-
     implementation(libs.kotlinx.serialization)
 
     implementation(libs.room.runtime)

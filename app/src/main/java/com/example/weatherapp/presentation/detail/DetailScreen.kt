@@ -24,7 +24,7 @@ fun DetailScreen(
     longitude: Float,
     viewModel: DetailViewModel = koinViewModel()
 ) {
-    val state = viewModel.container.stateFlow.collectAsStateWithLifecycle()
+    val state = viewModel.detailState.collectAsStateWithLifecycle()
 
     when (val stateValue = state.value.detailUiState) {
         DetailUiState.Loading -> {

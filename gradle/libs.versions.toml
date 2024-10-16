@@ -12,7 +12,6 @@ koin = "3.5.3"
 coroutines = "1.9.0"
 retrofit = "2.9.0"
 okhttp3 = "4.12.0"
-mvi = "4.3.0"
 navigationCompose = "2.8.1"
 serialization = "1.6.2"
 moshi = "2.9.0"
@@ -43,8 +42,6 @@ retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref =
 retrofit2-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp3" }
 okhttp3-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3" }
-mvi-viewmodel = { group = "org.orbit-mvi", name = "orbit-viewmodel", version.ref = "mvi" }
-mvi-compose = { group = "org.orbit-mvi", name = "orbit-compose", version.ref = "mvi" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
 retrofit2-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "moshi" }
